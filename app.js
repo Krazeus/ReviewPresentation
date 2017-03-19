@@ -1,6 +1,5 @@
 
 let express = require('express');
-let io = require('socket.io')(app);
 
 let path = require('path');
 let favicon = require('serve-favicon');
@@ -11,6 +10,8 @@ let bodyParser = require('body-parser');
 let index = require('./routes/index');
 
 let app = express();
+let server = require('http').Server(app)
+let io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,4 +47,4 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = server;
